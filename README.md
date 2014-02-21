@@ -3,8 +3,10 @@ Dehar Madjer
 2A ENSAE 2013/2014
 
 Projet C++ Débutants
+====================
 
 Sujet : Bomberman
+=================
 
 Touches directionnelles pour se déplacer.
 Espace pour poser une Bombe.
