@@ -18,6 +18,7 @@ const int BlockSize2 = 48;
 Image image;
 
 // la première fonction sert à dessiner la carte au début du jeu, tandis que la deuxième va nous permettre de l'actualiser.
+// en effet c'est TableauSprites qui sera modifié au cours du jeu et qui est donc nécessaire pour actualiser la carte.
 
 	void LoadMap(RenderWindow &Window, string nomimage, int MapFile[10][10], Sprite TableauSprites[10][10], Sprite Herbe, Sprite Brique1, Sprite Brique2)	
 	{
