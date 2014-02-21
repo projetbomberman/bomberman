@@ -1,3 +1,4 @@
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
@@ -9,9 +10,12 @@ using namespace sf;
 #include <fstream>
 using namespace std;
 
-#include "Objet.h"
+
 #include "Animation.h"
 
 
-void LoadMap(const char *grille, int MapFile[10][10]);
-void DrawMap(RenderWindow &Window, string nomimage, int MapFile[10][10]);
+
+
+void LoadMap(RenderWindow &Window, string nomimage, int MapFile[10][10], Sprite TableauSprites[10][10],  Sprite Herbe, Sprite Brique1, Sprite Brique2);
+void DrawMap(RenderWindow &Window, Sprite TableauSprites[10][10]);
+
