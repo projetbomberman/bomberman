@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include <iostream>
@@ -9,6 +10,8 @@ using namespace std;
 #include <SFML/System.hpp>
 using namespace sf;
 
+#include"Animation.h"
+#include"Carte.h"
  
 class Bombe
 {
@@ -17,10 +20,12 @@ class Bombe
     Bombe();
     Bombe(int degats, int taille, std::string type);
 	void LoadContent();
-	void exploser(int degats, int taille, std::string type);
+	void exploser(RenderWindow &Window, string nomimage, int i, int j,Sprite TableauSprites[10][10], int MapFile[10][10]);
     void afficher() const;
 	int GetDegats() const;
 	Sprite GetSprite();
+
+	Animation bombeAnimation;
  
     private:
 	
@@ -30,9 +35,11 @@ class Bombe
 	string m_type;
 	int m_degats;
 	int m_taille;
+	Clock clock;
 
 };
  
+
 
 
 
