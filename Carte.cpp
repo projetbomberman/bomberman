@@ -18,10 +18,6 @@ const int BlockSize = 70;
 const int BlockSize2 = 48;
 
 Image image;
-	
-
-	int loadCounterX=0;
-	int loadCounterY=0;
 
 
 	void LoadMap(RenderWindow &Window, string nomimage, int MapFile[10][10], Sprite TableauSprites[10][10], Sprite Herbe, Sprite Brique1, Sprite Brique2)	
