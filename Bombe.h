@@ -19,8 +19,8 @@ class Bombe
  
     Bombe();
     Bombe(int degats, int taille, std::string type);
+	void poser(RenderWindow &Window, string nomimage, int i, int j,Sprite TableauSprites[10][10], int MapFile[10][10]);
 	void exploser(RenderWindow &Window, string nomimage, int i, int j,Sprite TableauSprites[10][10], int MapFile[10][10]);
-    void afficher() const;
 	int GetDegats() const;
 
 	Animation bombeAnimation;
