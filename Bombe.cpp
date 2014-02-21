@@ -50,11 +50,8 @@ void Bombe::exploser(RenderWindow &Window, string nomimage, int i, int j, Sprite
 
 		else
 		{	
-
-			float time= clock.GetElapsedTime();		
-
+		
 //ici on pose la bombe:
-
 			Sprite Bombe;
 			Bombe.SetImage(image2);
 			Bombe.SetSubRect(IntRect(BlockSize , BlockSize, 2*BlockSize, 2*BlockSize)); 
@@ -64,11 +61,16 @@ void Bombe::exploser(RenderWindow &Window, string nomimage, int i, int j, Sprite
 			DrawMap(Window, TableauSprites);
 
 // elle va maintenant détruire ce qui l'entoure:
+			Clock clock;
+			float elapsedtime=0;
+			while (elapsedtime<15*Window.GetFrameTime())
+			{
+				elapsedtime=clock.GetElapsedTime()+Window.GetFrameTime();
+			}
+		
+			if (elapsedtime >= 15* Window.GetFrameTime())
+			{
 
-		if (time > 8* Window.GetFrameTime())
-			{	
-			//	/*while (time < 60 * Window.GetFrameTime())
-		//	{
 					Sprite Casse;
 					Casse.SetImage(image2);
 					Casse.SetSubRect(IntRect(2*BlockSize , 2*BlockSize, 3*BlockSize, 3*BlockSize)); 
@@ -76,22 +78,24 @@ void Bombe::exploser(RenderWindow &Window, string nomimage, int i, int j, Sprite
 
 					TableauSprites[i+1][j]=Casse;
 					TableauSprites[i+1][j].SetPosition((i+1)*BlockSize2, j*BlockSize2);
-			
+
 
 					TableauSprites[i-1][j]=Casse;
 					TableauSprites[i-1][j].SetPosition((i-1)*BlockSize2, j*BlockSize2);
-				
+
 
 					TableauSprites[i][j+1]=Casse;
 					TableauSprites[i][j+1].SetPosition(i*BlockSize2, (j+1)*BlockSize2);
-			
+
 
 					TableauSprites[i][j-1]=Casse;
 					TableauSprites[i][j-1].SetPosition(i*BlockSize2, (j-1)*BlockSize2);
-				
+
 
 					DrawMap(Window, TableauSprites);
-				}
+			}
+		
+
 //*/
 //				/*Sprite Herbe;
 //				Herbe.SetImage(image2);
@@ -126,22 +130,4 @@ void Bombe::exploser(RenderWindow &Window, string nomimage, int i, int j, Sprite
 			clock.Reset();
 		}
 }
-
-
-
-
- 
-void Bombe::afficher() const
-{
-	cout << "Bombe : " << m_type << " (Degats : " << m_degats << ", Taille : " << m_taille << " ) " << endl;
-}
-
-int Bombe::GetDegats() const
-{
-	return m_degats;
-}
-
-
-
-
 
