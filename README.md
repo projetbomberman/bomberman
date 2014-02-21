@@ -10,6 +10,7 @@ Sujet : Bomberman
 
 Touches directionnelles pour se déplacer.
 Espace pour poser une Bombe.
+Les fichiers spritesbomberman.png et Player.png doivent se trouver dans le même dossier que l'executable.
 
 Nous avons choisi de réaliser notre projet avec la librairie externe SFML 1.6 car elle est adaptée à la création d'applications 2D en C++.
 Nous avons eu un peu de mal à installer cette librairie pour pouvoir l'utiliser avec Visual Studio 2010 ce qui nous a pris beaucoup de temps, M.Patra nous a débloqué lors du premier suivi.
@@ -24,7 +25,7 @@ Une autre méthode (celle que nous avons finalement choisi) est de créer direct
 
 Nous avons ensuite créé la classe Player pour le personnage et une classe Animation qui sert à créer ses mouvements.
 
-La classe Animation 
+La classe Animation permet de définir les fonctions nécessaires à l’initialisation et au déplacement du joueur. On peut ainsi manipuler les coordonnées, la position (les différents Frames, ie joueur tourné vers la droite, la gauche, marchant etc…), et le mouvement. Pour ce dernier, dans la fonction Update, nous avons d’ailleurs utilisé la durée de rafraîchissement (Window.GetFrameTime()) de l’écran car le mouvement du personnage en dépend.
 
 Nous avons donné au player une animation associée à la feuille de sprites Player.png contenant les différentes vues du personnage. Dans la classe Player nous avons créé les méthodes permettant le déplacement du joueur lorsque l'on appuie sur les touches directionnelles et intégré les collisions : nous avons créé des booleens CollHaut, CollBas... disant s'il y a collision avec une brique rouge ou non et nous avons intégré ceci aux méthodes de déplacement. 
 Cette classe contient également des méthodes permettant l'accès à ses atributs privés et une méthode lui permettant de prendre des dégâts, de poser une bombe... (la plupart étant annotées dans le code)
@@ -38,3 +39,5 @@ Lorsque le timer dépasse ce seuil, on crée des sprites de briques cassées sur
 On créer aussitôt un autre timer et lorsque celui-ci dépasse une certaine valeur on crée des nouveaux sprites d'herbe qui remplacent les sprites de bombe et brique cassée dans TableauSprites et on les dessine avec DrawMap.
 
 Cependant, tout s'affiche en même temps quelles que soient les valeurs que l'on donne aux seuils. L'écart temporel entre l'affichage des sprites de bombe, de briques cassées et d'herbe semble n'être que d'une période d'actualisation de l'écran au lieu d'être celui défini par les seuils.
+
+Nous n’avons ainsi pas eu le temps de gérer la mort du personnage, ie à savoir s’il est touché par les cases voisines de l’endroit où il a posé la bombe, à cause de ce même problème de timer.
