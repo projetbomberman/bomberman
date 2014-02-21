@@ -1,10 +1,4 @@
 
-
-//int main()
-//{
-	//Personnage Madjer(100, 10,2,"type1");
-	//Madjer.afficherEtat();
-//}
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
