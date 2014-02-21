@@ -79,7 +79,7 @@ void Bombe::exploser(RenderWindow &Window, string nomimage, int i, int j, Sprite
 			
 
 					TableauSprites[i-1][j]=Casse;
-					TableauSprites[i][j].SetPosition(i*BlockSize2, j*BlockSize2);
+					TableauSprites[i-1][j].SetPosition(i*BlockSize2, j*BlockSize2);
 				
 
 					TableauSprites[i][j+1]=Casse;
