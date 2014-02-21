@@ -120,3 +120,6 @@ void Animation::Draw(RenderWindow &Window)
 {
 	Window.Draw(spriteImage);
 }
+
+
+
