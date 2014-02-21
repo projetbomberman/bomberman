@@ -9,9 +9,10 @@ Sujet : Bomberman
 Touches directionnelles pour se déplacer.
 Espace pour poser une Bombe.
 
-	Nous avons choisi de réaliser notre projet avec la librairie externe SFML 1.6 car elle est adaptée à la création d'applications 2D en C++. Nous avons eu un peu de mal à installer cette librairie pour pouvoir l'utiliser avec Visual Studio 2010 ce qui nous a pris beaucoup de temps, M.Patra nous a débloqué lors du premier suivi.
-
-	Nous avons commencé par l'affichage d'une fenêtre dans laquelle nous avons dessiné notre TileMap. Les méthodes de construction de la carte se trouvent dans Carte.h et Carte.cpp.
+Nous avons choisi de réaliser notre projet avec la librairie externe SFML 1.6 car elle est adaptée à la création d'applications 2D en C++.
+Nous avons eu un peu de mal à installer cette librairie pour pouvoir l'utiliser avec Visual Studio 2010 ce qui nous a pris beaucoup de temps, M.Patra nous a débloqué lors du premier suivi.
+	
+Nous avons commencé par l'affichage d'une fenêtre dans laquelle nous avons dessiné notre TileMap. Les méthodes de construction de la carte se trouvent dans Carte.h et Carte.cpp.
 
 Pour ce faire, nous avons employé 2 méthodes : 
 Nous avons créé 3 sprites à partir d'une image (spritesbomberman.png).
