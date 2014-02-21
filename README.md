@@ -9,15 +9,14 @@ Sujet : Bomberman
 Touches directionnelles pour se déplacer.
 Espace pour poser une Bombe.
 
-	Nous avons choisi de réaliser notre projet avec la librairie externe SFML 1.6 car elle est adaptée à la création d'applications 2D en C++.
-	Nous avons eu un peu de mal à installer cette librairie pour pouvoir l'utiliser avec Visual Studio 2010 ce qui nous a pris beaucoup de temps, M.Patra nous a débloqué lors du premier suivi.
+	Nous avons choisi de réaliser notre projet avec la librairie externe SFML 1.6 car elle est adaptée à la création d'applications 2D en C++. Nous avons eu un peu de mal à installer cette librairie pour pouvoir l'utiliser avec Visual Studio 2010 ce qui nous a pris beaucoup de temps, M.Patra nous a débloqué lors du premier suivi.
 
 	Nous avons commencé par l'affichage d'une fenêtre dans laquelle nous avons dessiné notre TileMap. Les méthodes de construction de la carte se trouvent dans Carte.h et Carte.cpp.
 
 Pour ce faire, nous avons employé 2 méthodes : 
 Nous avons créé 3 sprites à partir d'une image (spritesbomberman.png).
 
-Nous avons d'abord créé un fichier texte contenant des 0 des 1 et des 2 formant un carré de dimension 10 caractères*10 caractères. MapFile est un tableau d'entiers. Puis une méthode DrawMap qui va lire le fichier texte pour remplir MapFile et qui a chaque chiffre associe un sprite qu'il va dessiner dans la fenêtre à sa place. L'emplacement MapFile[i][j] correspond à l'eplacement i*taille de l'image, j*taille de l'image.
+Nous avons d'abord créé un fichier texte contenant des 0 des 1 et des 2 formant un carré de dimension 10 caractères x 10 caractères. MapFile est un tableau d'entiers. Puis une méthode DrawMap qui va lire le fichier texte pour remplir MapFile et qui a chaque chiffre associe un sprite qu'il va dessiner dans la fenêtre à sa place. L'emplacement MapFile[i][j] correspond à l'eplacement i x taille de l'image, j x taille de l'image.
 Une autre méthode (celle que nous avons finalement choisi) est de créer directement un tableau de sprites et de dessiner chaque sprite à son emplacement. Celle-ci convient mieux car elle permet d'avoir des sprites localisés ce qui nous sert pour les collisions.
 
 Nous avons ensuite créé la classe Player pour le personnage et une classe Animation qui sert à créer ses mouvements.
