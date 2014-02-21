@@ -1,7 +1,7 @@
 
 #include "Player.h"
-#include<math.h>
 #include"Carte.h"
+#include<math.h>
 #include <iostream>
 using namespace std;
 
@@ -22,11 +22,14 @@ Player::~Player(void)
 }
 
 
+//Initialise les coordonnées du joeur, sa vitesse, sa position.
+
 void Player::Initialize() 
 {
-	x=y=10;
+	x=y=BlockSize2;
 	moveSpeed = 200;
-	currentFrameX = currentFrameY = 0;
+	currentFrameX = 0;
+	currentFrameY = 2;
 	playerAnimation.Initialize(x, y ,4, 4);
 
 }
@@ -38,22 +41,32 @@ void Player::LoadContent()
 
 }
 
-int Player::CaseX() // cette fonction renvoie l'abscisse de la case dans laquelle se trouve le joueur.
+
+
+// cette fonction renvoie l'abscisse de la case dans laquelle se trouve le joueur.
+// On recentre la position du joueur (car la position (x,y) correspond au coin en haut à droite) grâce à la hauteur et à la largeur du Frame.
+
+
+
+int Player::CaseX() 
 {	
-	return floor((x+16)/48);
+	return floor((x+playerAnimation.getFrameWidth()/2)/BlockSize2);
 
 }
 
 int Player::CaseY()	// de même pour l'ordonnée.
 {
-	return floor((y+24)/48);
+	return floor((y+playerAnimation.getFrameHeight()/2)/BlockSize2);
 }
 
+
+
 //les fonctions suivantes empechent le joueur d'avancer lorsqu'il est face à une brique rouge.
+// de la même manière on recentre pour les cotés droit/bas.
 
 bool Player::CollDroite(int MapFile[10][10], Player player, float x, float y) //le joueur se cogne à sa droite
 {	
-	if ( ((x + 32 >= ( player.CaseX()+1 )*BlockSize2)) && (MapFile[player.CaseX() + 1][player.CaseY()] == 1) )
+	if ( ((x + playerAnimation.getFrameWidth()>= ( player.CaseX()+1 )*BlockSize2)) && (MapFile[player.CaseX() + 1][player.CaseY()] > 0) )
 	{
           return true; 
 	}
@@ -65,8 +78,8 @@ bool Player::CollDroite(int MapFile[10][10], Player player, float x, float y) //
 
 bool Player::CollGauche(int MapFile[10][10], Player player, float x, float y) // le joueur se cogne à sa gauche
 {
-   if( ((x <= ( player.CaseX())*BlockSize2)) && (MapFile[player.CaseX()-1][player.CaseY()] == 1) )
-	{
+   if( ((x <= ( player.CaseX())*BlockSize2)) && (MapFile[player.CaseX()-1][player.CaseY()] > 0) )
+	{ 
           return true; 
 	}
    else
@@ -77,7 +90,7 @@ bool Player::CollGauche(int MapFile[10][10], Player player, float x, float y) //
 
 bool Player::CollHaut(int MapFile[10][10], Player player, float x, float y)
 {
-   if( ((y <= ( player.CaseY())*BlockSize2)) && (MapFile[player.CaseX()][player.CaseY()-1] == 1) )
+   if( ((y <= ( player.CaseY())*BlockSize2)) && (MapFile[player.CaseX()][player.CaseY()-1]  > 0) )
    {
           return true; 
    }
@@ -89,7 +102,7 @@ bool Player::CollHaut(int MapFile[10][10], Player player, float x, float y)
 
 bool Player::CollBas(int MapFile[10][10], Player player, float x, float y)
 {
-   if((y + 48 >= ( player.CaseY()+1)*BlockSize2) && (MapFile[player.CaseX()][player.CaseY()+1] == 1) )
+   if((y + playerAnimation.getFrameHeight() >= ( player.CaseY()+1)*BlockSize2) && (MapFile[player.CaseX()][player.CaseY()+1] >0) )
    {
           return true;
    }
@@ -99,7 +112,11 @@ bool Player::CollBas(int MapFile[10][10], Player player, float x, float y)
    }
 }
 
-void Player::Update(RenderWindow &Window, Player player, int MapFile[10][10]) // fonction qui permet au joueur de se déplacer.
+
+
+// fonction qui permet au joueur de se déplacer.
+
+void Player::Update(RenderWindow &Window, Player player, int MapFile[10][10]) 
 {
 	playerAnimation.setActive(true);
 	
@@ -173,30 +190,74 @@ void Player::poserBombe(RenderWindow &Window, string nomimage, Player player, Sp
 	playerAnimation.setActive(true);
 	
 	if (Window.GetInput().IsKeyDown(Key::Space))
-	{
- 		if ((currentFrameY==0) && (CollBas(MapFile, player, x, y)==false))
-		{
-			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()+1, TableauSprites, MapFile); 
+	{	
+		Clock clock;
+		float elapsedtime=0;
 
+ 		if ((currentFrameY==0) && (CollBas(MapFile, player, x, y)==false))
+		{	
+			m_bombe.poser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()+1, TableauSprites, MapFile);
+			while (elapsedtime<10*Window.GetFrameTime())
+			{
+				elapsedtime=clock.GetElapsedTime()+Window.GetFrameTime();
+			}
+
+			if (elapsedtime >= 10* Window.GetFrameTime())
+			{
+			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()+1, TableauSprites, MapFile); 
+			}
+			clock.Reset();
 		}
 
 		else if ((currentFrameY==1) && (CollGauche(MapFile, player, x, y)==false))
-		{
-			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX()-1,player.CaseY(),TableauSprites, MapFile);
+		{	
+			
+			m_bombe.poser(Window, "spritesbomberman.png", player.CaseX()-1,player.CaseY(), TableauSprites, MapFile);
+			while (elapsedtime<10*Window.GetFrameTime())
+			{
+				elapsedtime=clock.GetElapsedTime()+Window.GetFrameTime();
+			}
 
+			if (elapsedtime >= 10* Window.GetFrameTime())
+			{
+			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX()-1,player.CaseY(), TableauSprites, MapFile); 
+			}
+			clock.Reset();
 		}
 
 		else if ((currentFrameY==2) && (CollDroite(MapFile, player, x, y)==false))
 		{
-			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX()+1,player.CaseY(),TableauSprites, MapFile);
+			
+			m_bombe.poser(Window, "spritesbomberman.png", player.CaseX()+1,player.CaseY(), TableauSprites, MapFile); 
+			while (elapsedtime<10*Window.GetFrameTime())
+			{
+				elapsedtime=clock.GetElapsedTime()+Window.GetFrameTime();
+			}
 
+			if (elapsedtime >= 10* Window.GetFrameTime())
+			{
+			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX()+1,player.CaseY(), TableauSprites, MapFile); 
+			}
+			clock.Reset();
 		}
 
 		else if ((currentFrameY==3) && (CollHaut(MapFile, player, x, y)==false))
 		{
-			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()-1,TableauSprites, MapFile);
-		
+			
+			m_bombe.poser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()-1, TableauSprites, MapFile);
+			while (elapsedtime<10*Window.GetFrameTime())
+			{
+				elapsedtime=clock.GetElapsedTime()+Window.GetFrameTime();
+			}
+
+			if (elapsedtime >= 10* Window.GetFrameTime())
+			{
+			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()-1, TableauSprites, MapFile); 
+			}
+			clock.Reset();
+			
 		}
+
 	}
 }
 
@@ -217,9 +278,10 @@ bool Player::estVivant()
 void Player::afficherEtat() const
 {
 	cout << "Vie : " << m_vie << endl;
-	m_bombe.afficher();
 
 }
+
+
 
 
 
