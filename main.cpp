@@ -1,3 +1,10 @@
+
+
+//int main()
+//{
+	//Personnage Madjer(100, 10,2,"type1");
+	//Madjer.afficherEtat();
+//}
 #include <string>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -11,11 +18,14 @@ using namespace sf;
 #include <ctime>
 using namespace std;
 
-#include "Objet.h"
 #include "Carte.h"
 #include "Player.h"
 
 int MapFile[10][10];
+Sprite Herbe, Brique1, Brique2;
+Sprite TableauSprites[10][10];
+
+
 
 
 int main()
@@ -23,28 +33,12 @@ int main()
 	RenderWindow Window(VideoMode(480, 480, 32), "Map Bomberban");
 
 
-	for (int i=0; i<10; i++)
-		{
-			MapFile[i][0]=2;
-			MapFile[i][9]=2;
-		}
-	for (int i=0; i<10; i++)
-		{
-			MapFile[0][i]=2;
-			MapFile[9][i]=2;
-		}
-
-			MapFile[5][6]=1;
-			MapFile[7][3]=1;
-			MapFile[5][2]=1;
-			MapFile[1][6]=1;
-			MapFile[8][6]=1;
-			MapFile[7][7]=1;
-			MapFile[2][2]=1;
 
 		Player player;
 		player.Initialize();
 		player.LoadContent();
+		LoadMap(Window, "spritesbomberman.png", MapFile, TableauSprites, Herbe, Brique1, Brique2);
+
 
 		while(Window.IsOpened())
 		{
@@ -57,12 +51,18 @@ int main()
 
 			player.Update(Window, player, MapFile);
 			player.Draw(Window);
+			
+			
 			Window.Display();
 
 			Window.Clear();
-			DrawMap(Window, "spritesbomberman.png", MapFile);
-			player.poserBombe(Window, player,MapFile);
+
+			DrawMap(Window, TableauSprites);
+			player.poserBombe(Window, "spritesbomberman.png", player, TableauSprites, MapFile);
+
+			
 		}
 
 	return 0;
 }
+
