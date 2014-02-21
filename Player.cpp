@@ -1,3 +1,4 @@
+
 #include "Player.h"
 #include<math.h>
 #include"Carte.h"
@@ -21,7 +22,7 @@ Player::~Player(void)
 }
 
 
-void Player::Initialize()
+void Player::Initialize() 
 {
 	x=y=10;
 	moveSpeed = 200;
@@ -37,18 +38,20 @@ void Player::LoadContent()
 
 }
 
-int Player::CaseX()
+int Player::CaseX() // cette fonction renvoie l'abscisse de la case dans laquelle se trouve le joueur.
 {	
 	return floor((x+16)/48);
 
 }
 
-int Player::CaseY()
+int Player::CaseY()	// de même pour l'ordonnée.
 {
 	return floor((y+24)/48);
 }
 
-bool Player::CollDroite(int MapFile[10][10], Player player, float x, float y)
+//les fonctions suivantes empechent le joueur d'avancer lorsqu'il est face à une brique rouge.
+
+bool Player::CollDroite(int MapFile[10][10], Player player, float x, float y) //le joueur se cogne à sa droite
 {	
 	if ( ((x + 32 >= ( player.CaseX()+1 )*BlockSize2)) && (MapFile[player.CaseX() + 1][player.CaseY()] == 1) )
 	{
@@ -60,7 +63,7 @@ bool Player::CollDroite(int MapFile[10][10], Player player, float x, float y)
 	}
 }
 
-bool Player::CollGauche(int MapFile[10][10], Player player, float x, float y)
+bool Player::CollGauche(int MapFile[10][10], Player player, float x, float y) // le joueur se cogne à sa gauche
 {
    if( ((x <= ( player.CaseX())*BlockSize2)) && (MapFile[player.CaseX()-1][player.CaseY()] == 1) )
 	{
@@ -80,7 +83,7 @@ bool Player::CollHaut(int MapFile[10][10], Player player, float x, float y)
    }
    else
    {
-          return false;
+           return false;
    }
 }
 
@@ -96,29 +99,48 @@ bool Player::CollBas(int MapFile[10][10], Player player, float x, float y)
    }
 }
 
-void Player::Update(RenderWindow &Window, Player player, int MapFile[10][10])
+void Player::Update(RenderWindow &Window, Player player, int MapFile[10][10]) // fonction qui permet au joueur de se déplacer.
 {
 	playerAnimation.setActive(true);
 	
-	if ((Window.GetInput().IsKeyDown(Key::Right)) && (CollDroite(MapFile, player, x, y)==false))
-	{
-		x+= moveSpeed * Window.GetFrameTime();
+	if (Window.GetInput().IsKeyDown(Key::Right))
+	{	
 		currentFrameY = 2;
+
+		if (CollDroite(MapFile, player, x, y)==false)
+		{
+			x+= moveSpeed * Window.GetFrameTime();
+		}
+		
 	}
-	else if((Window.GetInput().IsKeyDown(Key::Left)) && (CollGauche(MapFile, player, x, y)==false))
-	{
-		x-= moveSpeed * Window.GetFrameTime();
+	else if(Window.GetInput().IsKeyDown(Key::Left)) 
+	{	
 		currentFrameY = 1;
+
+		if  (CollGauche(MapFile, player, x, y)==false)
+		{
+			x-= moveSpeed * Window.GetFrameTime();
+		}
+		
 	}
-	else if((Window.GetInput().IsKeyDown(Key::Up)) && (CollHaut(MapFile, player, x, y)==false))
-	{
-		y-= moveSpeed * Window.GetFrameTime();
+	else if(Window.GetInput().IsKeyDown(Key::Up))
+	{	
 		currentFrameY = 3;
+
+		if (CollHaut(MapFile, player, x, y)==false)
+		{
+		y-= moveSpeed * Window.GetFrameTime();
+		}
 	}
-	else if((Window.GetInput().IsKeyDown(Key::Down)) && (CollBas(MapFile, player, x, y)==false))
+	else if(Window.GetInput().IsKeyDown(Key::Down)) 
 	{
-		y+= moveSpeed * Window.GetFrameTime();
 		currentFrameY = 0;
+
+		if (CollBas(MapFile, player, x, y)==false)
+		{
+		y+= moveSpeed * Window.GetFrameTime();
+		}
+		
 	}
 	else 
 	playerAnimation.setActive(false);
@@ -144,18 +166,42 @@ void Player::recevoirDegats(int nbDegats)
 	}
 }
 
-void Player::poserBombe(RenderWindow &Window, Player player, int MapFile[10][10])
+
+
+void Player::poserBombe(RenderWindow &Window, string nomimage, Player player, Sprite TableauSprites[10][10], int MapFile[10][10]) // permet au joueur de faire disparaître la brique faceà laquelle il se trouve.
 {
-	//playerAnimation.setActive(true);
+	playerAnimation.setActive(true);
 	
-	if ((Window.GetInput().IsKeyDown(Key::Space)))
+	if (Window.GetInput().IsKeyDown(Key::Space))
 	{
-		m_bombe.GetSprite().SetPosition(CaseX()*BlockSize2,CaseY()*BlockSize2);
-		Sprite sprite =  m_bombe.GetSprite();
-		Window.Draw(sprite);
+ 		if ((currentFrameY==0) && (CollBas(MapFile, player, x, y)==false))
+		{
+			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()+1, TableauSprites, MapFile); 
+
+		}
+
+		else if ((currentFrameY==1) && (CollGauche(MapFile, player, x, y)==false))
+		{
+			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX()-1,player.CaseY(),TableauSprites, MapFile);
+
+		}
+
+		else if ((currentFrameY==2) && (CollDroite(MapFile, player, x, y)==false))
+		{
+			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX()+1,player.CaseY(),TableauSprites, MapFile);
+
+		}
+
+		else if ((currentFrameY==3) && (CollHaut(MapFile, player, x, y)==false))
+		{
+			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()-1,TableauSprites, MapFile);
 		
+		}
 	}
 }
+
+
+
 
 bool Player::estVivant()
 {
@@ -174,5 +220,6 @@ void Player::afficherEtat() const
 	m_bombe.afficher();
 
 }
+
 
 
