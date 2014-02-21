@@ -1,3 +1,5 @@
+
+
 #pragma once
 
 #include <SFML/Graphics.hpp>
@@ -13,6 +15,7 @@ using namespace std;
 
 #include "Animation.h"
 #include "Bombe.h"
+#include"Carte.h"
 
 
 class Player
@@ -29,13 +32,14 @@ public:
 	int CaseX();
 	int CaseY();
 
+
 	bool CollDroite (int MapFile[10][10], Player player, float x, float y);
 	bool CollGauche (int MapFile[10][10], Player player, float x, float y);
 	bool CollBas (int MapFile[10][10], Player player, float x, float y);
 	bool CollHaut (int MapFile[10][10], Player player, float x, float y);
 
 	void recevoirDegats(int nbDegats);
-	void poserBombe(RenderWindow &Window, Player player, int MapFile[10][10]);
+	void poserBombe(RenderWindow &Window, string nomimage, Player player, Sprite TableauSprites[10][10], int MapFile[10][10]);
 	bool estVivant();
 	void afficherEtat() const;
 
