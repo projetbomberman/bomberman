@@ -191,71 +191,25 @@ void Player::poserBombe(RenderWindow &Window, string nomimage, Player player, Sp
 	
 	if (Window.GetInput().IsKeyDown(Key::Space))
 	{	
-		Clock clock;
-		float elapsedtime=0;
 
  		if ((currentFrameY==0) && (CollBas(MapFile, player, x, y)==false))
 		{	
-			m_bombe.poser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()+1, TableauSprites, MapFile);
-			while (elapsedtime<10*Window.GetFrameTime())
-			{
-				elapsedtime=clock.GetElapsedTime()+Window.GetFrameTime();
-			}
-
-			if (elapsedtime >= 10* Window.GetFrameTime())
-			{
 			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()+1, TableauSprites, MapFile); 
-			}
-			clock.Reset();
 		}
 
 		else if ((currentFrameY==1) && (CollGauche(MapFile, player, x, y)==false))
 		{	
-			
-			m_bombe.poser(Window, "spritesbomberman.png", player.CaseX()-1,player.CaseY(), TableauSprites, MapFile);
-			while (elapsedtime<10*Window.GetFrameTime())
-			{
-				elapsedtime=clock.GetElapsedTime()+Window.GetFrameTime();
-			}
-
-			if (elapsedtime >= 10* Window.GetFrameTime())
-			{
 			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX()-1,player.CaseY(), TableauSprites, MapFile); 
-			}
-			clock.Reset();
 		}
 
 		else if ((currentFrameY==2) && (CollDroite(MapFile, player, x, y)==false))
 		{
-			
-			m_bombe.poser(Window, "spritesbomberman.png", player.CaseX()+1,player.CaseY(), TableauSprites, MapFile); 
-			while (elapsedtime<10*Window.GetFrameTime())
-			{
-				elapsedtime=clock.GetElapsedTime()+Window.GetFrameTime();
-			}
-
-			if (elapsedtime >= 10* Window.GetFrameTime())
-			{
 			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX()+1,player.CaseY(), TableauSprites, MapFile); 
-			}
-			clock.Reset();
 		}
 
 		else if ((currentFrameY==3) && (CollHaut(MapFile, player, x, y)==false))
 		{
-			
-			m_bombe.poser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()-1, TableauSprites, MapFile);
-			while (elapsedtime<10*Window.GetFrameTime())
-			{
-				elapsedtime=clock.GetElapsedTime()+Window.GetFrameTime();
-			}
-
-			if (elapsedtime >= 10* Window.GetFrameTime())
-			{
 			m_bombe.exploser(Window, "spritesbomberman.png", player.CaseX(),player.CaseY()-1, TableauSprites, MapFile); 
-			}
-			clock.Reset();
-			
 		}
 
 	}
