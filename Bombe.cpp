@@ -75,19 +75,19 @@ void Bombe::exploser(RenderWindow &Window, string nomimage, int i, int j, Sprite
 					Casse.Resize(BlockSize2,BlockSize2);
 
 					TableauSprites[i+1][j]=Casse;
-					TableauSprites[i+1][j].SetPosition(i*BlockSize2, j*BlockSize2);
+					TableauSprites[i+1][j].SetPosition((i+1)*BlockSize2, j*BlockSize2);
 			
 
 					TableauSprites[i-1][j]=Casse;
-					TableauSprites[i-1][j].SetPosition(i*BlockSize2, j*BlockSize2);
+					TableauSprites[i-1][j].SetPosition((i-1)*BlockSize2, j*BlockSize2);
 				
 
 					TableauSprites[i][j+1]=Casse;
-					TableauSprites[i][j+1].SetPosition(i*BlockSize2, j*BlockSize2);
+					TableauSprites[i][j+1].SetPosition(i*BlockSize2, (j+1)*BlockSize2);
 			
 
 					TableauSprites[i][j-1]=Casse;
-					TableauSprites[i][j-1].SetPosition(i*BlockSize2, j*BlockSize2);
+					TableauSprites[i][j-1].SetPosition(i*BlockSize2, (j-1)*BlockSize2);
 				
 
 					DrawMap(Window, TableauSprites);
