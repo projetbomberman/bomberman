@@ -1,4 +1,3 @@
-
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/System.hpp>
@@ -9,10 +8,6 @@ using namespace sf;
 #include <iostream>
 #include <fstream>
 using namespace std;
-
-
-#include "Animation.h"
-
 
 
 
