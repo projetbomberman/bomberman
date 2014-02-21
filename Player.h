@@ -43,7 +43,7 @@ public:
 	bool estVivant();
 	void afficherEtat() const;
 
-	Animation animate/*[4]*/;
+	Animation animate;
 
 protected: 
 	Animation playerAnimation;
