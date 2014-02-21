@@ -1,6 +1,4 @@
-
 #include "Carte.h"
-#include"Animation.h"
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
