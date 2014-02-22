@@ -24,9 +24,11 @@ executable : contient le .exe qui fonctionne quel que soit le pc
 Les fichiers spritesbomberman.png et Player.png doivent se trouver dans le même dossier que l'executable (qui se trouve dans le dossier executable).
 note du projet ci-présente
 
-
-	Notre projet  est réalisé avec la librairie externe SFML 1.6 car elle est adaptée à la création d'applications 2D en C++.
-	Nous avons eu un peu de mal à installer cette librairie pour pouvoir l'utiliser avec Visual Studio 2010 , ce qui nous a fait perdre beaucoup de temps, mais M.Patra nous a débloqué lors du premier suivi.
+Notre projet est réalisé avec la librairie externe SFML 1.6 car elle est adaptée à la création
+d'applications 2D en C++.
+Nous avons eu un peu de mal à installer cette librairie pour pouvoir l'utiliser avec Visual
+Studio 2010 , ce qui nous a fait perdre beaucoup de temps, mais M.Patra nous a débloqué lors du
+premier suivi.
 
 	Nous avons commencé par l'affichage d'une fenêtre dans laquelle nous avons dessiné notre TileMap. Les méthodes de construction de la carte se trouvent dans Carte.h et Carte.cpp.
 
