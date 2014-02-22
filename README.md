@@ -22,7 +22,7 @@ Nous avons installé sfml en STATIC donc pas besoin des dll dans le même dossie
 - Un screenshot du jeu
 - executable : contient le .exe qui fonctionne quel que soit le pc
 Les fichiers spritesbomberman.png et Player.png doivent se trouver dans le même dossier que l'executable (qui se trouve dans le dossier executable).
--note du projet ci-présente
+- note d'explication du projet ci-présente
 
 Notre projet est réalisé avec la librairie externe SFML 1.6 car elle est adaptée à la création
 d'applications 2D en C++.
