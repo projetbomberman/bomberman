@@ -16,13 +16,13 @@ Espace pour poser une Bombe.
 Contenu du dossier rendu de projet :
 ------------------------------------
 
-Mon jeu : dossier contenant le vcxproj, le sln, tous les fichiers source
+- Mon jeu : dossier contenant le vcxproj, le sln, tous les fichiers source
 Sfml 1.6 : librairie externe utilisée ( http://sfml-dev.org/tutorials/1.6/start-vc.php )
 Nous avons installé sfml en STATIC donc pas besoin des dll dans le même dossier.
-Un screenshot du jeu
-executable : contient le .exe qui fonctionne quel que soit le pc
+- Un screenshot du jeu
+- executable : contient le .exe qui fonctionne quel que soit le pc
 Les fichiers spritesbomberman.png et Player.png doivent se trouver dans le même dossier que l'executable (qui se trouve dans le dossier executable).
-note du projet ci-présente
+-note du projet ci-présente
 
 Notre projet est réalisé avec la librairie externe SFML 1.6 car elle est adaptée à la création
 d'applications 2D en C++.
@@ -30,11 +30,12 @@ Nous avons eu un peu de mal à installer cette librairie pour pouvoir l'utiliser
 Studio 2010 , ce qui nous a fait perdre beaucoup de temps, mais M.Patra nous a débloqué lors du
 premier suivi.
 
-	Nous avons commencé par l'affichage d'une fenêtre dans laquelle nous avons dessiné notre TileMap. Les méthodes de construction de la carte se trouvent dans Carte.h et Carte.cpp.
+Nous avons commencé par l'affichage d'une fenêtre dans laquelle nous avons dessiné notre
+TileMap. Les méthodes de construction de la carte se trouvent dans Carte.h et Carte.cpp.
 
 Pour ce faire, nous avons essayé 2 méthodes :
 
-Nous avons d'abord créé un fichier texte contenant des 0 des 1 et des 2 (correspondant à 3 Sprites différents, Herbe, Brique rouge et grise), formant un carré de dimension 10 caractères*10 caractères, Puis une méthode DrawMap qui va lire le fichier texte pour remplir MapFile (tableau d’entiers) et qui a chaque chiffre associe un sprite qu'il va dessiner dans la fenêtre à sa place. L'emplacement MapFile[i][j] correspond à l'emplacement i*taille de l'image, j*taille de l'image (en pixels).
+Nous avons d'abord créé un fichier texte contenant des 0 des 1 et des 2 (correspondant à 3 Sprites différents, Herbe, Brique rouge et grise), formant un carré de dimension 10 caractères x 10 caractères, Puis une méthode DrawMap qui va lire le fichier texte pour remplir MapFile (tableau d’entiers) et qui a chaque chiffre associe un sprite qu'il va dessiner dans la fenêtre à sa place. L'emplacement MapFile[i][j] correspond à l'emplacement i x taille de l'image, j x taille de l'image (en pixels).
 
 Une autre méthode (celle que nous avons finalement choisi) est de créer directement un tableau de sprites et de dessiner chaque sprite à son emplacement. Celle-ci convient mieux car elle permet d'avoir des sprites localisés ce qui nous sert pour les collisions.
 
